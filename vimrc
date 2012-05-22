@@ -51,6 +51,8 @@ if has("gui_running")
         set dictionary+=/usr/share/dict/words
         " Don't save swap files in the current working directory
         set dir-=.
+        " Don't put undofiles in the current working directory
+        set undodir-=.
     endif
     " Make the mouse disappear when in vim
     set mousehide
