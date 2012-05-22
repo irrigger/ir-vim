@@ -131,6 +131,13 @@ set mouse=""
 
 if has("autocmd")
 
+    " Stolen from TPetticrew's vimrc
+    " Remove line/column selection on inactive panes
+    autocmd WinEnter * setlocal cursorline
+    autocmd WinLeave * setlocal nocursorline
+    autocmd WinEnter * setlocal cursorcolumn
+    autocmd WinLeave * setlocal nocursorcolumn
+
     " Automatically delete trailing white spaces
     autocmd BufEnter,BufRead,BufWrite * silent! %s/[\r \t]\+$//
     autocmd BufEnter *.php :%s/[ \t\r]\+$//e
