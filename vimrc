@@ -45,14 +45,15 @@ if has("gui_running")
     elseif has("unix")
         " Some attempts at nice fonts
         set guifont=Courier\ 10,DejaVu\ Sans\ Mono\ 9
-        " Save the persistant undo files to the undo dir
-        " set undodir=$TMPDIR
         " Path to dictionary for vim to use in completion
         set dictionary+=/usr/share/dict/words
-        " Don't save swap files in the current working directory
-        set dir-=.
-        " Don't put undofiles in the current working directory
-        set undodir-=.
+
+        " Where to put backup files
+        set backupdir-=~/.vim/_data/backup
+        " Where to put swap files
+        set dir-=~/.vim/_data/swap
+        " Where to put undo files
+        set undodir=~/.vim/_data/undo
     endif
     " Make the mouse disappear when in vim
     set mousehide
