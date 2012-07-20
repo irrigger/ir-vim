@@ -48,6 +48,25 @@ if has("gui_running")
         " Path to dictionary for vim to use in completion
         set dictionary+=/usr/share/dict/words
 
+        " We'll force create these directories
+        " We don't want these in our repo
+        let idirname = expand("~/.vim/_data")
+        if !isdirectory(idirname)
+            call mkdir(idirname)
+        endif
+        let ibackup = idirname . "/backup"
+        if !isdirectory(ibackup)
+            call mkdir(ibackup)
+        endif
+        let iswap = idirname . "/swap"
+        if !isdirectory(iswap)
+            call mkdir(iswap)
+        endif
+        let iundo = idirname . "/undo"
+        if !isdirectory(iundo)
+            call mkdir(iundo)
+        endif
+
         " Where to put backup files
         set backupdir=~/.vim/_data/backup
         " Where to put swap files
