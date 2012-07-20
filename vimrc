@@ -49,9 +49,9 @@ if has("gui_running")
         set dictionary+=/usr/share/dict/words
 
         " Where to put backup files
-        set backupdir-=~/.vim/_data/backup
+        set backupdir=~/.vim/_data/backup
         " Where to put swap files
-        set dir-=~/.vim/_data/swap
+        set dir=~/.vim/_data/swap
         " Where to put undo files
         set undodir=~/.vim/_data/undo
     endif
