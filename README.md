@@ -7,14 +7,13 @@ write my vimrc in such a way as to support all three with a single vimrc.
 
 Installation
 ------------
-`
-cd ~
-git clone https://github.com/irrigger/ir-vim.git .vim
-ln -s .vim/vimrc .vimrc
-cd .vim
-git submodules init
-git submodules update
-`
+
+	cd ~
+	git clone https://github.com/irrigger/ir-vim.git .vim
+	ln -s .vim/vimrc .vimrc
+	cd .vim
+	git submodules init
+	git submodules update
 
 You should now be up and running with my setup.
 
