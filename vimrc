@@ -22,70 +22,68 @@ filetype on
 " Enable loading indent file for filetype
 filetype plugin indent on
 
-" Settings for GUI Vim and Terminal Vim
+if has("gui_macvim")
+    if has("gui_running")
+        set lines=75
+        set columns=78
+    endif
+elseif has("win32")
+    if has("autocmd")
+        " Starts gvim in full screen mode
+        autocmd GUIEnter * simalt ~x
+        " Get rid of this flash crap whenever a buffer is entered
+        autocmd GUIEnter * set visualbell t_vb=
+    endif
+    " Set the temp dir so swap files can be saved
+    set dir=$TEMP
+    " Remove special windows keys (copy/paste/etc)
+    set keymodel=
+elseif has("unix")
+    " Some attempts at nice fonts
+    set guifont=Courier\ 10,DejaVu\ Sans\ Mono\ 9
+    " Path to dictionary for vim to use in completion
+    set dictionary+=/usr/share/dict/words
+
+    " We'll force create these directories
+    " We don't want these in our repo
+    let idirname = expand("~/.vim/_data")
+    if !isdirectory(idirname)
+        call mkdir(idirname)
+    endif
+
+    " Create the dirs we need.  A little loop will do just fine.
+    let dirs = ['backup', 'swap', 'undo']
+    for dir in dirs
+        let tmp = idirname . "/" . dir
+        if !isdirectory(tmp)
+            call mkdir(tmp)
+        endif
+    endfor
+
+    " Where to put backup files
+    set backupdir=~/.vim/_data/backup
+    " Where to put swap files
+    set dir=~/.vim/_data/swap
+    " Where to put undo files
+    set undodir=~/.vim/_data/undo
+endif
 if has("gui_running")
     " Highlight the cursor line
     set cul
     " Highlight the cursor column
     set cuc
-    if has("gui_macvim")
-        set lines=75
-        set columns=78
-    elseif has("win32")
-        if has("autocmd")
-            " Starts gvim in full screen mode
-            autocmd GUIEnter * simalt ~x
-            " Get rid of this flash crap whenever a buffer is entered
-            autocmd GUIEnter * set visualbell t_vb=
-        endif
-        " Set the temp dir so swap files can be saved
-        set dir=$TEMP
-        " Remove special windows keys (copy/paste/etc)
-        set keymodel=
-    elseif has("unix")
-        " Some attempts at nice fonts
-        set guifont=Courier\ 10,DejaVu\ Sans\ Mono\ 9
-        " Path to dictionary for vim to use in completion
-        set dictionary+=/usr/share/dict/words
-
-        " We'll force create these directories
-        " We don't want these in our repo
-        let idirname = expand("~/.vim/_data")
-        if !isdirectory(idirname)
-            call mkdir(idirname)
-        endif
-        let ibackup = idirname . "/backup"
-        if !isdirectory(ibackup)
-            call mkdir(ibackup)
-        endif
-        let iswap = idirname . "/swap"
-        if !isdirectory(iswap)
-            call mkdir(iswap)
-        endif
-        let iundo = idirname . "/undo"
-        if !isdirectory(iundo)
-            call mkdir(iundo)
-        endif
-
-        " Where to put backup files
-        set backupdir=~/.vim/_data/backup
-        " Where to put swap files
-        set dir=~/.vim/_data/swap
-        " Where to put undo files
-        set undodir=~/.vim/_data/undo
-    endif
     " Make the mouse disappear when in vim
     set mousehide
     " Give me just the code area. No need for toolbars
-	set guioptions=ac
+    set guioptions=ac
+    " My colorsceme
+    colorscheme molokai
+    let g:molokai_original=0
 else
     " Adapt colors for dark background
     set background=dark
     set t_Co=256
 endif
-" My colorsceme
-colorscheme molokai
-let g:molokai_original=0
 
 " ======================================= Basic Settings ===
 " Make command line one line high
@@ -190,9 +188,11 @@ if has("autocmd")
 
 endif
 
+" Setup command to easily call to run python buffer
 command! RunPythonBuffer call DoRunPythonBuffer()
-
+" Run current buffer in python
 map <leader>p :RunPythonBuffer<CR>
+" Echo current file path and put in middle mouse buffer
 map <leader>f :let @*=expand('%:p')<CR>:echom @*<CR>
 
 " ========================================== Key Binding ===
