@@ -26,9 +26,9 @@ Contributing
 Many individuals have contributed to my vim setup:
 
 * Kevin Macphail
-* Travis Peticrew
-* Derek Wyatt
-* Drew Neil
+* Travis Peticrew [Github] (https://github.com/tpett)
+* Derek Wyatt [Blog] (derekwyatt.org)
+* Drew Neil [Vimcasts] (vimcasts.org)
 * Tim Pope [Pathogen, Fugitive, Repeat, Surround](https://github.com/tpope)
 * Steve Losh [Gundo] (https://github.com/sjl)
 * Jeff Lanzarotta [bufexplorer] (http://www.vim.org/account/profile.php?user_id=97)
