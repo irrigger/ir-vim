@@ -34,10 +34,30 @@ elseif has("win32")
         " Get rid of this flash crap whenever a buffer is entered
         autocmd GUIEnter * set visualbell t_vb=
     endif
-    " Set the temp dir so swap files can be saved
-    set dir=$TEMP
+    let idirname = expand("~\\vimfiles\\_data")
+    if !isdirectory(idirname)
+        call mkdir(idirname)
+    endif
+
+    " Create the dirs we need.  A little loop will do just fine.
+    let dirs = ['backup', 'swap', 'undo']
+    for dir in dirs
+        let tmp = idirname . "\\" . dir
+        if !isdirectory(tmp)
+            call mkdir(tmp)
+        endif
+    endfor
+
+    " Where to put backup files
+    set backupdir=~\\vimfiles\\_data\\backup
+    " Where to put swap files
+    set dir=~\\vimfiles\\_data\\swap
+    " Where to put undo files
+    set undodir=~\\vimfiles\\_data\\undo
+
     " Remove special windows keys (copy/paste/etc)
     set keymodel=
+
 elseif has("unix")
     " Some attempts at nice fonts
     set guifont=Courier\ 10,DejaVu\ Sans\ Mono\ 9
