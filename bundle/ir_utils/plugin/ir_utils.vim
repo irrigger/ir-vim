@@ -137,18 +137,18 @@ END
 endfunction
 
 function! ToggleLineLengthHilight()
-    if !exists("b:ir_line_length_hilight")
-        exec 'match WarningMsg /\%'.b:textwidth.'v.*/'
-        let b:ir_line_length_hilight = 1
-    else
-        if b:ir_line_length_hilight == 1
-            exec 'match'
-            let b:ir_line_length_hilight = 0
-        else
-            exec 'match WarningMsg /\%'.b:textwidth.'v.*/'
-            let b:ir_line_length_hilight = 1
-        endif
+    let l:toggle = 0
+    if exists("b:ir_line_length_hilight")
+        let l:toggle = b:ir_line_length_hilight
     endif
+    if l:toggle == 1
+        exec 'match'
+        let l:toggle = 0
+    else
+        exec 'match WarningMsg /\%'.b:textwidth.'v.*/'
+        let l:toggle = 1
+    endif
+    let b:ir_line_length_hilight = l:toggle
 endfunction
 
 function! Templates() range
