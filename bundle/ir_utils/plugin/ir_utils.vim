@@ -136,6 +136,21 @@ print result
 END
 endfunction
 
+function! ToggleLineLengthHilight()
+    if !exists("b:ir_line_length_hilight")
+        exec 'match WarningMsg /\%'.b:textwidth.'v.*/'
+        let b:ir_line_length_hilight = 1
+    else
+        if b:ir_line_length_hilight == 1
+            exec 'match'
+            let b:ir_line_length_hilight = 0
+        else
+            exec 'match WarningMsg /\%'.b:textwidth.'v.*/'
+            let b:ir_line_length_hilight = 1
+        endif
+    endif
+endfunction
+
 function! Templates() range
 python << END
 
