@@ -197,8 +197,7 @@ map <leader>f :let @*=expand('%:p')<CR>:echom @*<CR>
 
 " ========================================== Key Binding ===
 " Match the lines that are too long.
-nmap <leader>m :exec 'match WarningMsg /\%'.b:textwidth.'v.*/'<CR>
-nmap <leader>n :match<CR>
+nmap <leader>m :call ToggleLineLengthHilight()<CR>
 " Shortcut to grab last inserted text
 nmap gV `[v`]
 " Turning off the stupid man pages thing
@@ -230,85 +229,4 @@ let python_highlight_all=1
 
 " Gundo Plugin
 nnoremap <F5> :GundoToggle<CR>
-
-" ============================================== Testing ===
-"Python folding
-" autocmd FileType python setlocal foldmethod=indent
-
-" Will allow you to put vim settings into normal files. I have no use atm
-" Last lines in document sets vim mode
-" set modeline
-" Number lines checked for modelines
-" set modelines=3
-
-
-
-" =========================================== Deprecated ===
-" Removed because it wasn't very useful.
-" An updated status line works just as well.
-" Show line numbers
-" set number
-
-" This makes junk way too slow
-    " Automatically highlight trailing spaces.
-    " autocmd InsertEnter * match ExtraSpace /\s\+\%#\@<!$/
-    " autocmd InsertLeave * match ExtraSpace /\s\+$/
-    " autocmd BufWinEnter * match ExtraSpace /\s\+$/
-    " autocmd BufWinLeave * call clearmatches()
-
-" I've decided to just use a hotkey for this
-    " autocmd BufRead,BufWrite *.py exe 'match WarningMsg /\%'.b:textwidth.'v.*/'
-
-" I have made this only for python files so I can turn off textwidth
-    " Filetype specific textwidth
-    " autocmd Filetype python setlocal textwidth=79
-    " autocmd Filetype vim,vimrc,c,cpp,java,mel setlocal textwidth=205
-    " autocmd BufRead,BufWrite * exe 'match OverLength /\%'.&textwidth.'v.*/'
-
-" I don't remember ever using this. I copied it from someone else's vimrc
-    " Turn highlighting on and off
-    " nmap <silent> ,n :set invhls<cr>:set hls?<cr>
-
-" Going to use vim's built in methods for this
-    " Mappings for creating new tabs and splits
-    " nnoremap <silent> <F1> :tabnew<CR>
-    " nnoremap <silent> <F2> :new<CR>
-    " nnoremap <silent> <F3> :vsplit<CR>
-
-    " Moving windows without having to hit W
-    " noremap <silent> <C-h> :wincmd h<CR>
-    " noremap <silent> <C-j> :wincmd j<CR>
-    " noremap <silent> <C-k> :wincmd k<CR>
-    " noremap <silent> <C-l> :wincmd l<CR>
-
-" I've got new procs for this
-    " Quickly commenting lines/blocks of code with the comment leader
-    " noremap <silent> ,c :<C-B>sil <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:noh<CR>
-    " noremap <silent> ,u :<C-B>sil <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:noh<CR>
-
-" Can't keep up with typing
-" Display incomplete commands
-    " set showcmd
-" my status line does this already
-" Display cursor position
-    " set ruler
-" I now have a toggle for this with <leader>s
-" Check spelling
-    " set spell
-
-" I now understand Vim's way of doing this and will use it instead.
-    " Pressing < or > will let you indent/unindent selected lines
-    " vnoremap < <gv
-    " vnoremap > >gv
-
-" This was just an experiment and I think it went well. I don't use this method though.
-    " Add ability to 'Bubble' text up and down
-    " nmap <C-Up> <Plug>unimpairedMoveUp
-    " nmap <C-Down> <Plug>unimpairedMoveDown
-    " xmap <C-Up> <Plug>unimpairedMoveUp
-    " xmap <C-Down> <Plug>unimpairedMoveDown
-    " nnoremap <silent> <Plug>unimpairedMoveUp   :<C-U>exe 'move--'.v:count1<CR>``
-    " nnoremap <silent> <Plug>unimpairedMoveDown :<C-U>exe 'move+'.v:count1<CR>``
-    " xnoremap <silent> <Plug>unimpairedMoveUp   :<C-U>exe '''<,''>move--'.v:count1<Bar>exe 'normal `[V`]'<CR>
-    " xnoremap <silent> <Plug>unimpairedMoveDown :<C-U>exe '''<,''>move''>+'.v:count1<Bar>exe 'normal `[V`]'<CR>
 
