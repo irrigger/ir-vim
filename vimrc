@@ -22,38 +22,19 @@ filetype on
 " Enable loading indent file for filetype
 filetype plugin indent on
 
-if has("gui_macvim")
-    if has("gui_running")
-        set lines=75
-        set columns=78
-    endif
-elseif has("win32")
+let irdata = '_data'
+let irdirs = {'backupdir': 'backup', 'dir': 'swap', 'undodir': 'undo'}
+let irsplit = '/'
+let irroot = '.vim'
+if has("win32")
     if has("autocmd")
         " Starts gvim in full screen mode
         autocmd GUIEnter * simalt ~x
         " Get rid of this flash crap whenever a buffer is entered
         autocmd GUIEnter * set visualbell t_vb=
     endif
-    let idirname = expand("~\\vimfiles\\_data")
-    if !isdirectory(idirname)
-        call mkdir(idirname)
-    endif
-
-    " Create the dirs we need.  A little loop will do just fine.
-    let dirs = ['backup', 'swap', 'undo']
-    for dir in dirs
-        let tmp = idirname . "\\" . dir
-        if !isdirectory(tmp)
-            call mkdir(tmp)
-        endif
-    endfor
-
-    " Where to put backup files
-    set backupdir=~\\vimfiles\\_data\\backup
-    " Where to put swap files
-    set dir=~\\vimfiles\\_data\\swap
-    " Where to put undo files
-    set undodir=~\\vimfiles\\_data\\undo
+    let irsplit = '\\'
+    let irroot = 'vimfiles'
 
     " Remove special windows keys (copy/paste/etc)
     set keymodel=
@@ -64,29 +45,29 @@ elseif has("unix")
     " Path to dictionary for vim to use in completion
     set dictionary+=/usr/share/dict/words
 
-    " We'll force create these directories
-    " We don't want these in our repo
-    let idirname = expand("~/.vim/_data")
-    if !isdirectory(idirname)
-        call mkdir(idirname)
-    endif
+elseif has("gui_macvim")
+    set lines=75
+    set columns=78
 
-    " Create the dirs we need.  A little loop will do just fine.
-    let dirs = ['backup', 'swap', 'undo']
-    for dir in dirs
-        let tmp = idirname . "/" . dir
-        if !isdirectory(tmp)
-            call mkdir(tmp)
-        endif
-    endfor
-
-    " Where to put backup files
-    set backupdir=~/.vim/_data/backup
-    " Where to put swap files
-    set dir=~/.vim/_data/swap
-    " Where to put undo files
-    set undodir=~/.vim/_data/undo
 endif
+
+" Let's create our _data directory in the vim root.
+let irdirname = expand('~' . irsplit . irroot . irsplit . irdata)
+if !isdirectory(irdirname)
+    call mkdir(irdirname)
+endif
+
+" Create the dirs we need.  A little loop will do just fine.
+" We'll also go ahead and assign the directories to their options.
+for dir in keys(irdirs)
+    let tmp = irdirname . irsplit . irdirs[dir]
+    if !isdirectory(tmp)
+        call mkdir(tmp)
+    endif
+    let cmd = "set " . dir . "=" . tmp
+    exec cmd
+endfor
+
 if has("gui_running")
     " Highlight the cursor line
     set cul
