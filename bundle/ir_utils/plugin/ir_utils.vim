@@ -136,11 +136,11 @@ print result
 END
 endfunction
 
-function! ToggleLineLengthHilight()
+function! ToggleLineLengthHighlight()
     let l:toggle = 0
     let l:status = 'off'
-    if exists("b:ir_line_length_hilight")
-        let l:toggle = b:ir_line_length_hilight
+    if exists("b:ir_line_length_highlight")
+        let l:toggle = b:ir_line_length_highlight
     endif
     if l:toggle == 1
         exec 'match'
@@ -150,9 +150,9 @@ function! ToggleLineLengthHilight()
         let l:status = 'on'
         let l:toggle = 1
     endif
-    let b:ir_line_length_hilight = l:toggle
+    let b:ir_line_length_highlight = l:toggle
 
-    echo 'Toggled line length hilight ' . l:status
+    echo 'Toggled line length highlight ' . l:status
 
 endfunction
 

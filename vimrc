@@ -198,7 +198,7 @@ map <leader>f :let @*=expand('%:p')<CR>:echom @*<CR>
 
 " ========================================== Key Binding ===
 " Match the lines that are too long.
-nmap <leader>m :call ToggleLineLengthHilight()<CR>
+nmap <leader>m :call ToggleLineLengthHighlight()<CR>
 " Shortcut to grab last inserted text
 nmap gV `[v`]
 " Turning off the stupid man pages thing
