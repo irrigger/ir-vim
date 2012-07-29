@@ -138,6 +138,7 @@ endfunction
 
 function! ToggleLineLengthHilight()
     let l:toggle = 0
+    let l:status = 'off'
     if exists("b:ir_line_length_hilight")
         let l:toggle = b:ir_line_length_hilight
     endif
@@ -146,9 +147,13 @@ function! ToggleLineLengthHilight()
         let l:toggle = 0
     else
         exec 'match WarningMsg /\%'.b:textwidth.'v.*/'
+        let l:status = 'on'
         let l:toggle = 1
     endif
     let b:ir_line_length_hilight = l:toggle
+
+    echo 'Toggled line length hilight ' . l:status
+
 endfunction
 
 function! Templates() range
