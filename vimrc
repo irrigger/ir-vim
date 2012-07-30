@@ -221,8 +221,8 @@ map <silent> <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimr
 " Sometimes I don't want spelling
 nmap <leader>s :setlocal spell! spelllang=en_gb<CR>
 " New commenting and uncommenting procs
-map ,c :call CommentLine()<CR>
-map ,u :call UncommentLine()<CR>
+map <leader>c :call CommentLine()<CR>
+map <leader>u :call UncommentLine()<CR>
 
 " ====================================== Plugin Settings ===
 "Additional python syntax highlighting
