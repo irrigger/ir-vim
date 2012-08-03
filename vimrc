@@ -198,6 +198,10 @@ map <leader>p :RunPythonBuffer<CR>
 " Echo current file path and put in middle mouse buffer
 map <leader>f :let @*=expand('%:p')<CR>:echom @*<CR>
 
+" I want to create something so that gm goes to the middle the current line
+" based on text width not screen
+" map gm :let @*=expand('%:p')<CR>:echom @*<CR>
+
 " ========================================== Key Binding ===
 " Match the lines that are too long.
 nmap <leader>m :call ToggleLineLengthHighlight()<CR>
