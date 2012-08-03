@@ -11,6 +11,7 @@
 
 " ==================================== Start Up Settings ===
 
+runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
 " Do not try to be VI compatible
