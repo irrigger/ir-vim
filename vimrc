@@ -136,10 +136,11 @@ set viminfo='100,/100,:100,@100
 set laststatus=2
 " Harder to explain but an awesome statusline just for me
 " %r tells me if the file is readonly
+" %{fugitive#statusline()} Lets me know what Git branch I'm in.
 " %{expand('%:p')} gives me the full path to the file
 " %l/%L current line and total lines
 " %v current column
-set statusline=%r\ F:%{expand('%:p')}\ L:%l/%L\ C:%v
+set statusline=%r\ %{fugitive#statusline()}\ F:%{expand('%:p')}\ L:%l/%L\ C:%v
 " This removes the characters between split windows (and some other junk)
 set fillchars="-"
 " This allows vim to work with buffers much more liberally. So no warnings when switching modified buffers
@@ -222,8 +223,8 @@ map <silent> <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimr
 " Sometimes I don't want spelling
 nmap <leader>s :setlocal spell! spelllang=en_gb<CR>
 " New commenting and uncommenting procs
-map ,c :call CommentLine()<CR>
-map ,u :call UncommentLine()<CR>
+map <leader>c :call CommentLine()<CR>
+map <leader>u :call UncommentLine()<CR>
 
 " ====================================== Plugin Settings ===
 "Additional python syntax highlighting
