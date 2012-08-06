@@ -165,7 +165,7 @@ if has("autocmd")
     autocmd BufEnter,BufRead,BufWrite * silent! %s/[\r \t]\+$//
     autocmd BufEnter *.php :%s/[ \t\r]\+$//e
     " Set current directory to that of the opened files
-    autocmd BufEnter,BufWrite * lcd %:p:h
+    autocmd BufEnter,BufWrite * silent! lcd %:p:h
     " Set default textwidth
     autocmd BufEnter * let b:textwidth=80
 
