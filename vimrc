@@ -183,7 +183,7 @@ if has("autocmd")
     autocmd FileType * let b:comment_leader = ''
     autocmd FileType vim,vimrc let b:comment_leader = '" '
     autocmd FileType haskell,vhdl,ada let b:comment_leader = '-- '
-    autocmd FileType c,cpp,java,mel let b:comment_leader = '// '
+    autocmd FileType c,cpp,java,mel,php let b:comment_leader = '// '
     autocmd FileType sh,make,python,tcsh let b:comment_leader = '# '
     autocmd FileType tex let b:comment_leader = '% '
 
