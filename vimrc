@@ -194,9 +194,9 @@ endif
 " Setup command to easily call to run python buffer
 command! RunPythonBuffer call DoRunPythonBuffer()
 " Run current buffer in python
-map <leader>p :RunPythonBuffer<CR>
+noremap <leader>p :RunPythonBuffer<CR>
 " Echo current file path and put in middle mouse buffer
-map <leader>f :let @*=expand('%:p')<CR>:echom @*<CR>
+noremap <leader>f :let @*=expand('%:p')<CR>:echom @*<CR>
 
 " I want to create something so that gm goes to the middle the current line
 " based on text width not screen
@@ -204,31 +204,31 @@ map <leader>f :let @*=expand('%:p')<CR>:echom @*<CR>
 
 " ========================================== Key Binding ===
 " Match the lines that are too long.
-nmap <leader>m :call ToggleLineLengthHighlight()<CR>
+noremap <leader>m :call ToggleLineLengthHighlight()<CR>
 " Shortcut to grab last inserted text
-nmap gV `[v`]
+noremap gV `[v`]
 " Turning off the stupid man pages thing
-map K <Nop>
+noremap K <Nop>
 " Shortcut to rapidly toggle `set list`
-nmap <leader>l :set list!<CR>
+noremap <leader>l :set list!<CR>
 " This if for custom wrap toggle
-nmap <silent> <leader>w :set invwrap<CR>:set wrap?<CR>
+noremap <silent> <leader>w :set invwrap<CR>:set wrap?<CR>
 " Clear highlights with spacebar
-nmap <silent> <Space> :nohlsearch <CR>
+noremap <silent> <Space> :nohlsearch <CR>
 " Allow me to scroll horizontally
-nmap <silent> <leader>o 30zl
-nmap <silent> <leader>i 30zh
+noremap <silent> <leader>o 30zl
+noremap <silent> <leader>i 30zh
 " Allows the resizing windows horizontally
 noremap <leader>. <C-w>20>
 noremap <leader>, <C-w>20<
 " Map to quickly open and reload my vimrc
-map <leader>v :e $MYVIMRC<CR><C-W>_
-map <silent> <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+noremap <leader>v :e $MYVIMRC<CR><C-W>_
+noremap <silent> <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 " Sometimes I don't want spelling
-nmap <leader>s :setlocal spell! spelllang=en_gb<CR>
+noremap <leader>s :setlocal spell! spelllang=en_gb<CR>
 " New commenting and uncommenting procs
-map <leader>c :call CommentLine()<CR>
-map <leader>u :call UncommentLine()<CR>
+noremap <leader>c :call CommentLine()<CR>
+noremap <leader>u :call UncommentLine()<CR>
 
 " ====================================== Plugin Settings ===
 "Additional python syntax highlighting
