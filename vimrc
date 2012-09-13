@@ -179,14 +179,6 @@ if has("autocmd")
     autocmd FileType * setlocal ts=4 sts=4 sw=4 noexpandtab cindent
     autocmd FileType python,vim,vimrc setlocal ts=4 sts=4 sw=4 expandtab
 
-    " Filetype specific comment leaders
-    autocmd FileType * let b:comment_leader = ''
-    autocmd FileType vim,vimrc let b:comment_leader = '" '
-    autocmd FileType haskell,vhdl,ada let b:comment_leader = '-- '
-    autocmd FileType c,cpp,java,mel,php let b:comment_leader = '// '
-    autocmd FileType sh,make,python,tcsh let b:comment_leader = '# '
-    autocmd FileType tex let b:comment_leader = '% '
-
     autocmd Filetype python let b:textwidth=79
 
 endif
