@@ -29,7 +29,7 @@ Many individuals have contributed to my vim setup:
 * Travis Peticrew [Github] (https://github.com/tpett)
 * Derek Wyatt [Blog] (derekwyatt.org)
 * Drew Neil [Vimcasts] (vimcasts.org)
-* Tim Pope [Pathogen, Fugitive, Repeat, Surround, Eunuch](https://github.com/tpope)
+* Tim Pope [Pathogen, Fugitive, Repeat, Surround, Eunuch, Commentary](https://github.com/tpope)
 * Steve Losh [Gundo] (https://github.com/sjl)
 * Jeff Lanzarotta [bufexplorer] (http://www.vim.org/account/profile.php?user_id=97)
 * Eric Van Dewoestine [SuperTab] (http://www.vim.org/account/profile.php?user_id=6016)
