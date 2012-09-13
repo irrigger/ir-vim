@@ -206,7 +206,7 @@ noremap <leader>f :let @*=expand('%:p')<CR>:echom @*<CR>
 " Match the lines that are too long.
 noremap <leader>m :call ToggleLineLengthHighlight()<CR>
 " Shortcut to grab last inserted text
-noremap gV `[v`]
+noremap gV `[V`]
 " Turning off the stupid man pages thing
 noremap K <Nop>
 " Shortcut to rapidly toggle `set list`
