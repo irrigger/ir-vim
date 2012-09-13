@@ -226,9 +226,6 @@ noremap <leader>v :e $MYVIMRC<CR><C-W>_
 noremap <silent> <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 " Sometimes I don't want spelling
 noremap <leader>s :setlocal spell! spelllang=en_gb<CR>
-" New commenting and uncommenting procs
-noremap <leader>c :call CommentLine()<CR>
-noremap <leader>u :call UncommentLine()<CR>
 
 " ====================================== Plugin Settings ===
 "Additional python syntax highlighting
