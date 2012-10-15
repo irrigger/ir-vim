@@ -199,6 +199,9 @@ noremap <leader>f :let @*=expand('%:p')<CR>:echom @*<CR>
 noremap <leader>m :call ToggleLineLengthHighlight()<CR>
 " Shortcut to grab last inserted text
 noremap gV `[v`]
+" Go to the middle of the line.  This is an override of the built in gm
+" which jumps to the middle of the line based on screen width instead of text.
+noremap gm :call cursor(0, len(getline('.'))/2)<CR>
 " Turning off the stupid man pages thing
 noremap K <Nop>
 " Shortcut to rapidly toggle `set list`
