@@ -121,7 +121,7 @@ set hlsearch
 " Tab complete commands
 set wildmenu
 " Complete from a Thesaurus if possible
-set complete+=,k,s
+set complete+=,k
 " List longest first. Don't know if I want this
 set wildmode=list:longest,full
 " Whoever wanted to modify a .pyc?
