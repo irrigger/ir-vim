@@ -43,8 +43,6 @@ if has("win32")
 elseif has("unix")
     " Some attempts at nice fonts
     set guifont=Courier\ 10,DejaVu\ Sans\ Mono\ 9
-    " Path to dictionary for vim to use in completion
-    set dictionary+=/usr/share/dict/words
 
 elseif has("gui_macvim")
     set lines=75
@@ -57,6 +55,14 @@ let irdirname = expand('~' . irsplit . irroot . irsplit . irdata)
 if !isdirectory(irdirname)
     call mkdir(irdirname)
 endif
+" Path to dictionary for vim to use in completion
+let dictionary_path = expand('~' . irsplit . irroot . irsplit . "dictionary" .  irsplit . "words")
+let dict_cmd = "set dictionary+=" . dictionary_path
+exec dict_cmd
+
+let thesaurus_path = expand('~' . irsplit . irroot . irsplit . "thesaurus" .  irsplit . "words")
+let thes_cmd = "set thesaurus+=" . thesaurus_path
+exec thes_cmd
 
 " Create the dirs we need.  A little loop will do just fine.
 " We'll also go ahead and assign the directories to their options.
@@ -115,7 +121,7 @@ set hlsearch
 " Tab complete commands
 set wildmenu
 " Complete from a Thesaurus if possible
-set complete+=s
+set complete+=,k,s
 " List longest first. Don't know if I want this
 set wildmode=list:longest,full
 " Whoever wanted to modify a .pyc?
@@ -189,10 +195,6 @@ command! RunPythonBuffer call DoRunPythonBuffer()
 noremap <leader>p :RunPythonBuffer<CR>
 " Echo current file path and put in middle mouse buffer
 noremap <leader>f :let @*=expand('%:p')<CR>:echom @*<CR>
-
-" I want to create something so that gm goes to the middle the current line
-" based on text width not screen
-" map gm :let @*=expand('%:p')<CR>:echom @*<CR>
 
 " ========================================== Key Binding ===
 " Match the lines that are too long.
