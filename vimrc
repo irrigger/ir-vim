@@ -56,11 +56,11 @@ if !isdirectory(irdirname)
     call mkdir(irdirname)
 endif
 " Path to dictionary for vim to use in completion
-let dictionary_path = expand('~' . irsplit . irroot . irsplit . "dictionary" .  irsplit . "words")
+let dictionary_path = expand('~' . irsplit . irroot . irsplit .  "dictionary.txt")
 let dict_cmd = "set dictionary+=" . dictionary_path
 exec dict_cmd
 
-let thesaurus_path = expand('~' . irsplit . irroot . irsplit . "thesaurus" .  irsplit . "words")
+let thesaurus_path = expand('~' . irsplit . irroot . irsplit . "thesaurus.txt")
 let thes_cmd = "set thesaurus+=" . thesaurus_path
 exec thes_cmd
 
