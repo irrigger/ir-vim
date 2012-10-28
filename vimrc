@@ -157,6 +157,8 @@ set undofile
 set sessionoptions=buffers,resize,winpos,winsize
 " Turning the mouse off.  Suck it mouse users.
 set mouse=""
+" Setting the language to everything NOT American English.
+set spelllang=en_gb,en_nx,en_au,en_ca
 
 if has("autocmd")
 
@@ -178,8 +180,8 @@ if has("autocmd")
 	" If a MayaAsii file hightlight as if a mel file
     autocmd BufRead,BufNewFile *.ma setf mel
 
-    " Ensure that all my auto formating is minimal
-    autocmd Filetype * setlocal formatoptions=t
+    " Ensure that all my auto formatting is minimal
+    autocmd Filetype * setlocal formatoptions=""
 
     " Filetype specific tabbing
     autocmd FileType * setlocal ts=4 sts=4 sw=4 noexpandtab cindent
@@ -223,6 +225,11 @@ noremap <leader>v :e $MYVIMRC<CR><C-W>_
 noremap <silent> <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 " Sometimes I don't want spelling
 noremap <leader>s :setlocal spell! spelllang=en_gb<CR>
+" Time to start hating myself.  I must learn to use <c-[> to get into normal mode.
+" I can't keept the C-[ binding because that is apparently exactly escape
+inoremap <esc> <nop>
+" There are no known words in the dictionary that start with kj so I will use this.
+inoremap kj <esc>
 
 " ====================================== Plugin Settings ===
 "Additional python syntax highlighting
