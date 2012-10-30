@@ -119,7 +119,7 @@ set shortmess=atI
 set hlsearch
 " Tab complete commands
 set wildmenu
-" Complete from a Thesaurus if possible
+" Complete from a Dictionary if possible
 set complete+=,k
 " List longest first. Don't know if I want this
 set wildmode=list:longest,full
@@ -217,12 +217,12 @@ noremap <leader>f :let @*=expand('%:p')<CR>:echom @*<CR>
 
 " ========================================== Key Binding ===
 " Match the lines that are too long.
-noremap <leader>m :call ToggleLineLengthHighlight()<CR>
+noremap <leader>m :ToggleLineLengthHighlight<CR>
 " Shortcut to grab last inserted text
 noremap gV `[v`]
 " Go to the middle of the line.  This is an override of the built in gm
 " which jumps to the middle of the line based on screen width instead of text.
-noremap gm :call GoMiddleOfLine()<CR>
+noremap gm :GoMiddleOfLine<CR>
 " Turning off the stupid man pages thing
 noremap K <Nop>
 " Shortcut to rapidly toggle `set list`
