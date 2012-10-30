@@ -55,14 +55,13 @@ let irdirname = expand('~' . irsplit . irroot . irsplit . irdata)
 if !isdirectory(irdirname)
     call mkdir(irdirname)
 endif
-" Path to dictionary for vim to use in completion
-let dictionary_path = expand('~' . irsplit . irroot . irsplit .  "dictionary.txt")
-let dict_cmd = "set dictionary+=" . dictionary_path
-exec dict_cmd
 
-let thesaurus_path = expand('~' . irsplit . irroot . irsplit . "thesaurus.txt")
-let thes_cmd = "set thesaurus+=" . thesaurus_path
-exec thes_cmd
+" Path to dictionary for vim to use in completion
+for wordfile in ['dictionary', 'thesaurus']
+    let path = expand('~' . irsplit . irroot . irsplit .  wordfile . ".txt")
+    let cmd = "set dictionary+=" . path
+    exec cmd
+endfor
 
 " Create the dirs we need.  A little loop will do just fine.
 " We'll also go ahead and assign the directories to their options.
@@ -159,36 +158,54 @@ set sessionoptions=buffers,resize,winpos,winsize
 set mouse=""
 " Setting the language to everything NOT American English.
 set spelllang=en_gb,en_nx,en_au,en_ca
+" Ensure that all my auto formatting is minimal
+set formatoptions=""
 
 if has("autocmd")
+    " I've set up these groups at the recommendation of Steve Losh's
+    " Learn Vimscript the Hardway
+    augroup clear_cursor
+        " Stolen from TPetticrew's vimrc
+        " Remove line/column selection on inactive panes
+        autocmd!
+        autocmd WinEnter * setlocal cursorline
+        autocmd WinLeave * setlocal nocursorline
+        autocmd WinEnter * setlocal cursorcolumn
+        autocmd WinLeave * setlocal nocursorcolumn
+    augroup END
 
-    " Stolen from TPetticrew's vimrc
-    " Remove line/column selection on inactive panes
-    autocmd WinEnter * setlocal cursorline
-    autocmd WinLeave * setlocal nocursorline
-    autocmd WinEnter * setlocal cursorcolumn
-    autocmd WinLeave * setlocal nocursorcolumn
+    augroup clear_whitespace
+        " Automatically delete trailing white spaces
+        autocmd!
+        autocmd BufEnter,BufRead,BufWrite * silent! %s/[\r \t]\+$//
+        autocmd BufEnter *.php :%s/[ \t\r]\+$//e
+    augroup END
 
-    " Automatically delete trailing white spaces
-    autocmd BufEnter,BufRead,BufWrite * silent! %s/[\r \t]\+$//
-    autocmd BufEnter *.php :%s/[ \t\r]\+$//e
-    " Set current directory to that of the opened files
-    autocmd BufEnter,BufWrite * silent! lcd %:p:h
-    " Set default textwidth
-    autocmd BufEnter * let b:textwidth=80
+    augroup set_working_path
+        " Set current directory to that of the opened files
+        autocmd!
+        autocmd BufEnter,BufWrite * silent! lcd %:p:h
+    augroup END
 
-	" If a MayaAsii file hightlight as if a mel file
-    autocmd BufRead,BufNewFile *.ma setf mel
+    augroup set_maya_ascii
+        " If a MayaAsii file hightlight as if a mel file
+        autocmd!
+        autocmd BufRead,BufNewFile *.ma setf mel
+    augroup END
 
-    " Ensure that all my auto formatting is minimal
-    autocmd Filetype * setlocal formatoptions=""
+    augroup set_tabbing
+        " Filetype specific tabbing
+        autocmd!
+        autocmd FileType * setlocal ts=4 sts=4 sw=4 noexpandtab cindent
+        autocmd FileType python,vim,vimrc setlocal ts=4 sts=4 sw=4 expandtab
+    augroup END
 
-    " Filetype specific tabbing
-    autocmd FileType * setlocal ts=4 sts=4 sw=4 noexpandtab cindent
-    autocmd FileType python,vim,vimrc setlocal ts=4 sts=4 sw=4 expandtab
-
-    autocmd Filetype python let b:textwidth=79
-
+    augroup set_text_width
+        " Set default textwidth
+        autocmd!
+        autocmd BufEnter * let b:textwidth=80
+        autocmd Filetype python let b:textwidth=79
+    augroup END
 endif
 
 " Setup command to easily call to run python buffer
@@ -226,7 +243,7 @@ noremap <silent> <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo '
 " Sometimes I don't want spelling
 noremap <leader>s :setlocal spell! spelllang=en_gb<CR>
 " Time to start hating myself.  I must learn to use <c-[> to get into normal mode.
-" I can't keept the C-[ binding because that is apparently exactly escape
+" I can't keep the C-[ binding because that is apparently exactly escape.
 inoremap <esc> <nop>
 " There are no known words in the dictionary that start with kj so I will use this.
 inoremap kj <esc>
