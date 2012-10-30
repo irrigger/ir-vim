@@ -59,7 +59,7 @@ endif
 " Path to dictionary for vim to use in completion
 for wordfile in ['dictionary', 'thesaurus']
     let path = expand('~' . irsplit . irroot . irsplit .  wordfile . ".txt")
-    let cmd = "set dictionary+=" . path
+    let cmd = "set " . wordfile . "+=" . path
     exec cmd
 endfor
 
