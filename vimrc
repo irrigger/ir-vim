@@ -42,7 +42,7 @@ if has("win32")
 
 elseif has("unix")
     " Some attempts at nice fonts
-    set guifont=Courier\ 10,DejaVu\ Sans\ Mono\ 9
+    set guifont=Inconsolata\ 10,DejaVu\ Sans\ Mono\ 10,Courier\ 10
 
 elseif has("gui_macvim")
     set lines=75
@@ -75,6 +75,16 @@ for dir in keys(irdirs)
 endfor
 
 if has("gui_running")
+    augroup clear_cursor
+        " Stolen from TPetticrew's vimrc
+        " Remove line/column selection on inactive panes
+        autocmd!
+        autocmd WinEnter * setlocal cursorline
+        autocmd WinLeave * setlocal nocursorline
+        autocmd WinEnter * setlocal cursorcolumn
+        autocmd WinLeave * setlocal nocursorcolumn
+    augroup END
+
     " Highlight the cursor line
     set cul
     " Highlight the cursor column
@@ -125,8 +135,10 @@ set complete+=,k
 set wildmode=list:longest,full
 " Whoever wanted to modify a .pyc?
 set wildignore+=*.pyc
+" Commandline remembrance
+set history=100000
 " Give me lots of Undos
-set history=10000
+set undolevels=100000
 " Let my cursor go everywhere
 set virtualedit=all
 " Search as I type
@@ -136,7 +148,7 @@ set shellslash
 " No word wrap
 set nowrap
 " Settings for vim to remember stuff on startup :help viminfo
-set viminfo='100,/100,:100,@100
+set viminfo='1000,h
 " Always show status line
 set laststatus=2
 " Harder to explain but an awesome statusline just for me
@@ -145,7 +157,7 @@ set laststatus=2
 " %{expand('%:p')} gives me the full path to the file
 " %l/%L current line and total lines
 " %v current column
-set statusline=%r\ %{fugitive#statusline()}\ F:%{expand('%:p')}\ L:%l/%L\ C:%v
+set statusline=\ [%r]\ %n\ %{fugitive#statusline()}\ F:%{expand('%:p')}\ L:%l/%L\ C:%v
 " This removes the characters between split windows (and some other junk)
 set fillchars="-"
 " This allows vim to work with buffers much more liberally. So no warnings when switching modified buffers
@@ -164,16 +176,6 @@ set formatoptions=""
 if has("autocmd")
     " I've set up these groups at the recommendation of Steve Losh's
     " Learn Vimscript the Hardway
-    augroup clear_cursor
-        " Stolen from TPetticrew's vimrc
-        " Remove line/column selection on inactive panes
-        autocmd!
-        autocmd WinEnter * setlocal cursorline
-        autocmd WinLeave * setlocal nocursorline
-        autocmd WinEnter * setlocal cursorcolumn
-        autocmd WinLeave * setlocal nocursorcolumn
-    augroup END
-
     augroup clear_whitespace
         " Automatically delete trailing white spaces
         autocmd!
@@ -187,10 +189,11 @@ if has("autocmd")
         autocmd BufEnter,BufWrite * silent! lcd %:p:h
     augroup END
 
-    augroup set_maya_ascii
-        " If a MayaAsii file hightlight as if a mel file
+    augroup set_filetypes
+        " Set some filtype stuff up
         autocmd!
         autocmd BufRead,BufNewFile *.ma setf mel
+        autocmd BufRead,BufNewFile SConstruct setf python
     augroup END
 
     augroup set_tabbing
