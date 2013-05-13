@@ -248,9 +248,9 @@ noremap <silent> <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo '
 noremap <leader>s :setlocal spell! spelllang=en_gb<CR>
 " Time to start hating myself.  I must learn to use <c-[> to get into normal mode.
 " I can't keep the C-[ binding because that is apparently exactly escape.
-inoremap <esc> <nop>
+" inoremap <esc> <nop>
 " There are no known words in the dictionary that start with kj so I will use this.
-inoremap kj <esc>
+" inoremap kj <esc>
 
 " ====================================== Plugin Settings ===
 "Additional python syntax highlighting
