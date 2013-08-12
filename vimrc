@@ -42,7 +42,7 @@ if has("win32")
 
 elseif has("unix")
     " Some attempts at nice fonts
-    set guifont=Inconsolata\ 10,DejaVu\ Sans\ Mono\ 10,Courier\ 10
+    set guifont=Inconsolata\ 8,DejaVu\ Sans\ Mono\ 8,Courier\ 8
 
 elseif has("gui_macvim")
     set lines=75
@@ -250,7 +250,8 @@ noremap <leader>s :setlocal spell! spelllang=en_gb<CR>
 " I can't keep the C-[ binding because that is apparently exactly escape.
 " inoremap <esc> <nop>
 " There are no known words in the dictionary that start with kj so I will use this.
-" inoremap kj <esc>
+" inoremap kj <es
+noremap <leader>sy :if exists("g:syntax_on") <Bar> syntax off <Bar> else <Bar> syntax on <Bar> endif <CR>c>
 
 " ====================================== Plugin Settings ===
 "Additional python syntax highlighting
