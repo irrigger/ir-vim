@@ -13,6 +13,7 @@
 
 runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
+:Helptags
 
 " Do not try to be VI compatible
 set nocompatible
@@ -42,7 +43,7 @@ if has("win32")
 
 elseif has("unix")
     " Some attempts at nice fonts
-    set guifont=Inconsolata\ 8,DejaVu\ Sans\ Mono\ 8,Courier\ 8
+    set guifont=Inconsolata\ 9,DejaVu\ Sans\ Mono\ 9,Courier\ 9
 
 elseif has("gui_macvim")
     set lines=75
@@ -75,18 +76,18 @@ for dir in keys(irdirs)
 endfor
 
 if has("gui_running")
-    augroup clear_cursor
-        " Stolen from TPetticrew's vimrc
-        " Remove line/column selection on inactive panes
-        autocmd!
-        autocmd WinEnter * setlocal cursorline
-        autocmd WinLeave * setlocal nocursorline
-        autocmd WinEnter * setlocal cursorcolumn
-        autocmd WinLeave * setlocal nocursorcolumn
-    augroup END
+    if has("autocmd")
+        augroup clear_cursor
+            " Stolen from TPetticrew's vimrc
+            " Remove line/column selection on inactive panes
+            autocmd!
+            autocmd WinEnter * setlocal cursorline
+            autocmd WinLeave * setlocal nocursorline
+            autocmd WinEnter * setlocal cursorcolumn
+            autocmd WinLeave * setlocal nocursorcolumn
+        augroup END
+    endif
 
-    " Highlight the cursor line
-    set cul
     " Highlight the cursor column
     set cuc
     " Make the mouse disappear when in vim
@@ -101,6 +102,9 @@ else
     set background=dark
     set t_Co=256
 endif
+
+" Highlight the cursor line
+set cul
 
 " ======================================= Basic Settings ===
 " Make command line one line high
@@ -183,6 +187,12 @@ if has("autocmd")
         autocmd BufEnter *.php :%s/[ \t\r]\+$//e
     augroup END
 
+    augroup set_syntax
+        " Set current directory to that of the opened files
+        autocmd!
+        autocmd BufEnter * silent! :syntax on
+    augroup END
+
     augroup set_working_path
         " Set current directory to that of the opened files
         autocmd!
@@ -260,3 +270,7 @@ let python_highlight_all=1
 " Gundo Plugin
 nnoremap <F5> :GundoToggle<CR>
 
+if  has("gui_running")
+    nnoremap <C-Up> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)+1', '')<CR>
+    nnoremap <C-Down> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)-1', '')<CR>
+endif
