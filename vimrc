@@ -149,6 +149,8 @@ set virtualedit=all
 set incsearch
 " Use the / instead of \
 set shellslash
+" tmp
+set shell=tcsh\ -i
 " No word wrap
 set nowrap
 " Settings for vim to remember stuff on startup :help viminfo
