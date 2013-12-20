@@ -149,8 +149,6 @@ set virtualedit=all
 set incsearch
 " Use the / instead of \
 set shellslash
-" tmp
-set shell=tcsh\ -i
 " No word wrap
 set nowrap
 " Settings for vim to remember stuff on startup :help viminfo
@@ -206,6 +204,7 @@ if has("autocmd")
         autocmd!
         autocmd BufRead,BufNewFile *.ma setf mel
         autocmd BufRead,BufNewFile SConstruct setf python
+        autocmd BufNewFile,BufRead *.z* setlocal filetype=zsh
     augroup END
 
     augroup set_tabbing
