@@ -149,7 +149,6 @@ set virtualedit=all
 set incsearch
 " Use the / instead of \
 set shellslash
-" tmp
 set shell=/bin/sh
 " No word wrap
 set nowrap
@@ -207,6 +206,7 @@ if has("autocmd")
         autocmd BufRead,BufNewFile *.ma setf mel
         autocmd BufRead,BufNewFile SConstruct setf python
         autocmd BufRead,BufNewFile wscript setf python
+        autocmd BufNewFile,BufRead *.z* setlocal filetype=zsh
     augroup END
 
     augroup set_tabbing
