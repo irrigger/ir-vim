@@ -150,7 +150,7 @@ set incsearch
 " Use the / instead of \
 set shellslash
 " tmp
-set shell=tcsh\ -i
+set shell=/bin/sh
 " No word wrap
 set nowrap
 " Settings for vim to remember stuff on startup :help viminfo
@@ -206,6 +206,7 @@ if has("autocmd")
         autocmd!
         autocmd BufRead,BufNewFile *.ma setf mel
         autocmd BufRead,BufNewFile SConstruct setf python
+        autocmd BufRead,BufNewFile wscript setf python
     augroup END
 
     augroup set_tabbing
@@ -272,7 +273,7 @@ let python_highlight_all=1
 " Gundo Plugin
 nnoremap <F5> :GundoToggle<CR>
 
-if  has("gui_running")
+if has("gui_running")
     nnoremap <C-Up> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)+1', '')<CR>
     nnoremap <C-Down> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)-1', '')<CR>
 endif
