@@ -273,6 +273,13 @@ let python_highlight_all=1
 " Gundo Plugin
 nnoremap <F5> :GundoToggle<CR>
 
+" Ultisnips Plugin
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+let g:UltiSnipsSnippetDirectories=['/people/bharris/custom/ultisnips']
+
 if has("gui_running")
     nnoremap <C-Up> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)+1', '')<CR>
     nnoremap <C-Down> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)-1', '')<CR>

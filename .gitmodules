@@ -36,4 +36,7 @@
 	url = git://github.com/tpope/vim-abolish.git
 [submodule "bundle/ultisnips"]
 	path = bundle/ultisnips
-	url = https://github.com/SirVer/ultisnips
+	url = git://github.com/SirVer/ultisnips
+[submodule "bundle/YouCompleteMe"]
+	path = bundle/YouCompleteMe
+	url = git://github.com/Valloric/YouCompleteMe.git
