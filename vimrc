@@ -184,14 +184,9 @@ if has("autocmd")
     augroup clear_whitespace
         " Automatically delete trailing white spaces
         autocmd!
-        autocmd BufEnter,BufRead,BufWrite * silent! %s/[\r \t]\+$//
+        autocmd BufWrite * :silent! %s/[\r \t]\+$//
+        " * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
         autocmd BufEnter *.php :%s/[ \t\r]\+$//e
-    augroup END
-
-    augroup set_syntax
-        " Set current directory to that of the opened files
-        autocmd!
-        autocmd BufEnter * silent! :syntax on
     augroup END
 
     augroup set_working_path
@@ -220,7 +215,13 @@ if has("autocmd")
         " Set default textwidth
         autocmd!
         autocmd BufEnter * let b:textwidth=80
-        autocmd Filetype python let b:textwidth=79
+        autocmd Filetype python let b:textwidth=80
+    augroup END
+
+    augroup enable_syntax_highlighting
+        autocmd!
+        autocmd! BufWinEnter,WinEnter * nested if exists('syntax_on') && ! exists('b:current_syntax') && ! empty(&l:filetype) && index(split(&eventignore, ','), 'Syntax') == -1 | syntax enable | endif
+        autocmd! BufRead * if exists('syntax_on') && exists('b:current_syntax') && ! empty(&l:filetype) && index(split(&eventignore, ','), 'Syntax') != -1 | unlet! b:current_syntax | endif
     augroup END
 endif
 
@@ -256,7 +257,7 @@ noremap <leader>. <C-w>20>
 noremap <leader>, <C-w>20<
 " Map to quickly open and reload my vimrc
 noremap <leader>v :e $MYVIMRC<CR><C-W>_
-noremap <silent> <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+noremap <silent> <leader>V :w<CR> :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 " Sometimes I don't want spelling
 noremap <leader>s :setlocal spell! spelllang=en_gb<CR>
 " Time to start hating myself.  I must learn to use <c-[> to get into normal mode.
@@ -274,9 +275,14 @@ let python_highlight_all=1
 nnoremap <F5> :GundoToggle<CR>
 
 " Ultisnips Plugin
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<C-a>"
+let g:UltiSnipsJumpForwardTrigger="<C-a>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-Space>"
+let g:UltiSnipsUsePythonVersion = 2
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 let g:UltiSnipsSnippetDirectories=['/people/bharris/custom/ultisnips']
 
