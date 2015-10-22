@@ -90,6 +90,9 @@ if has("gui_running")
 
     " Highlight the cursor column
     set cuc
+    " Highlight the cursor line
+    set cul
+
     " Make the mouse disappear when in vim
     set mousehide
     " Give me just the code area. No need for toolbars
@@ -102,9 +105,6 @@ else
     set background=dark
     set t_Co=256
 endif
-
-" Highlight the cursor line
-set cul
 
 " ======================================= Basic Settings ===
 " Make command line one line high
