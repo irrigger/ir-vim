@@ -102,6 +102,7 @@ if has("gui_running")
     let g:molokai_original=0
 else
     " Adapt colors for dark background
+    colorscheme slate
     set background=dark
     set t_Co=256
 endif
@@ -113,6 +114,8 @@ set ch=1
 set scrolloff=3
 " Always set autoindenting on
 set autoindent
+" Always set smartindent on
+set smartindent
 " Turn off erroring and beeping
 set noerrorbells
 " Show title in console title bar
@@ -223,6 +226,10 @@ if has("autocmd")
         autocmd! BufWinEnter,WinEnter * nested if exists('syntax_on') && ! exists('b:current_syntax') && ! empty(&l:filetype) && index(split(&eventignore, ','), 'Syntax') == -1 | syntax enable | endif
         autocmd! BufRead * if exists('syntax_on') && exists('b:current_syntax') && ! empty(&l:filetype) && index(split(&eventignore, ','), 'Syntax') != -1 | unlet! b:current_syntax | endif
     augroup END
+    augroup clean_fugitive_buffers
+        autocmd BufReadPost fugitive://* set bufhidden=delete
+        autocmd User fugitive if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' | nnoremap <buffer> .. :edit %:h<CR> | endif
+    augroup END
 endif
 
 " Setup command to easily call to run python buffer
@@ -290,3 +297,4 @@ if has("gui_running")
     nnoremap <C-Up> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)+1', '')<CR>
     nnoremap <C-Down> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)-1', '')<CR>
 endif
+
