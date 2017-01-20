@@ -32,8 +32,6 @@ if has("win32")
     if has("autocmd")
         " Starts gvim in full screen mode
         autocmd GUIEnter * simalt ~x
-        " Get rid of this flash crap whenever a buffer is entered
-        autocmd GUIEnter * set visualbell t_vb=
     endif
     let irsplit = '\\'
     let irroot = 'vimfiles'
@@ -43,7 +41,7 @@ if has("win32")
 
 elseif has("unix")
     " Some attempts at nice fonts
-    set guifont=Inconsolata\ 9,DejaVu\ Sans\ Mono\ 9,Courier\ 9
+    set guifont=Inconsolata\ 11,DejaVu\ Sans\ Mono\ 11,Courier\ 11
 
 elseif has("gui_macvim")
     set lines=75
@@ -117,7 +115,9 @@ set autoindent
 " Always set smartindent on
 set smartindent
 " Turn off erroring and beeping
+set visualbell
 set noerrorbells
+set t_vb=
 " Show title in console title bar
 set title
 " Don't jump to first character when paging
@@ -184,13 +184,13 @@ set formatoptions=""
 if has("autocmd")
     " I've set up these groups at the recommendation of Steve Losh's
     " Learn Vimscript the Hardway
-    augroup clear_whitespace
-        " Automatically delete trailing white spaces
-        autocmd!
-        autocmd BufWrite * :silent! %s/[\r \t]\+$//
-        " * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-        autocmd BufEnter *.php :%s/[ \t\r]\+$//e
-    augroup END
+    " augroup clear_whitespace
+    "     " Automatically delete trailing white spaces
+    "     autocmd!
+    "     autocmd BufWrite * :silent! %s/[\r \t]\+$//
+    "     " * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+    "     autocmd BufEnter *.php :%s/[ \t\r]\+$//e
+    " augroup END
 
     augroup set_working_path
         " Set current directory to that of the opened files
@@ -281,20 +281,9 @@ let python_highlight_all=1
 " Gundo Plugin
 nnoremap <F5> :GundoToggle<CR>
 
-" Ultisnips Plugin
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<C-a>"
-let g:UltiSnipsJumpForwardTrigger="<C-a>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-Space>"
-let g:UltiSnipsUsePythonVersion = 2
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-let g:UltiSnipsSnippetDirectories=['/people/bharris/custom/ultisnips']
-
 if has("gui_running")
     nnoremap <C-Up> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)+1', '')<CR>
     nnoremap <C-Down> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)-1', '')<CR>
 endif
 
+echo "WHAT THE FUCK!?"
