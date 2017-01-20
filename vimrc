@@ -115,9 +115,9 @@ set autoindent
 " Always set smartindent on
 set smartindent
 " Turn off erroring and beeping
-set visualbell
-set noerrorbells
-set t_vb=
+" set visualbell
+" set noerrorbells
+" set t_vb=
 " Show title in console title bar
 set title
 " Don't jump to first character when paging
@@ -265,6 +265,8 @@ noremap <leader>, <C-w>20<
 " Map to quickly open and reload my vimrc
 noremap <leader>v :e $MYVIMRC<CR><C-W>_
 noremap <silent> <leader>V :w<CR> :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+noremap <leader>g :e $MYGVIMRC<CR><C-W>_
+noremap <silent> <leader>G :w<CR> :source $MYGVIMRC<CR>:filetype detect<CR>:exe ":echo 'gvimrc reloaded'"<CR>
 " Sometimes I don't want spelling
 noremap <leader>s :setlocal spell! spelllang=en_gb<CR>
 " Time to start hating myself.  I must learn to use <c-[> to get into normal mode.
@@ -285,5 +287,3 @@ if has("gui_running")
     nnoremap <C-Up> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)+1', '')<CR>
     nnoremap <C-Down> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)-1', '')<CR>
 endif
-
-echo "WHAT THE FUCK!?"
