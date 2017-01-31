@@ -115,9 +115,9 @@ set autoindent
 " Always set smartindent on
 set smartindent
 " Turn off erroring and beeping
-" set visualbell
-" set noerrorbells
-" set t_vb=
+set visualbell
+set noerrorbells
+set t_vb=
 " Show title in console title bar
 set title
 " Don't jump to first character when paging
@@ -136,6 +136,8 @@ set shortmess=atI
 set hlsearch
 " Tab complete commands
 set wildmenu
+" New feature that will ignore case whne completing commandline
+set wildignorecase
 " Complete from a Dictionary if possible
 set complete+=,k
 " List longest first. Don't know if I want this
@@ -143,7 +145,7 @@ set wildmode=list:longest,full
 " Whoever wanted to modify a .pyc?
 set wildignore+=*.pyc
 " Commandline remembrance
-set history=100000
+set history=10000
 " Give me lots of Undos
 set undolevels=100000
 " Let my cursor go everywhere
