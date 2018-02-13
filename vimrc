@@ -75,12 +75,10 @@ endfor
 
 if has("gui_running")
     if has("autocmd")
-        augroup clear_cursor
+        augroup clear_cursorcolumn
             " Stolen from TPetticrew's vimrc
             " Remove line/column selection on inactive panes
             autocmd!
-            autocmd WinEnter * setlocal cursorline
-            autocmd WinLeave * setlocal nocursorline
             autocmd WinEnter * setlocal cursorcolumn
             autocmd WinLeave * setlocal nocursorcolumn
         augroup END
@@ -193,6 +191,12 @@ if has("autocmd")
     "     " * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
     "     autocmd BufEnter *.php :%s/[ \t\r]\+$//e
     " augroup END
+    augroup clear_cursorline
+        " Remove line/column selection on inactive panes
+        autocmd!
+        autocmd BufEnter * setlocal cursorline
+        autocmd WinLeave * setlocal nocursorline
+    augroup END
 
     augroup set_working_path
         " Set current directory to that of the opened files
@@ -204,6 +208,7 @@ if has("autocmd")
         " Set some filtype stuff up
         autocmd!
         autocmd BufRead,BufNewFile *.ma setf mel
+        autocmd BufRead,BufNewFile *.rpp setf cpp
         autocmd BufRead,BufNewFile SConstruct setf python
         autocmd BufRead,BufNewFile wscript setf python
         autocmd BufNewFile,BufRead *.z* setlocal filetype=zsh
@@ -219,8 +224,8 @@ if has("autocmd")
     augroup set_text_width
         " Set default textwidth
         autocmd!
-        autocmd BufEnter * let b:textwidth=80
-        autocmd Filetype python let b:textwidth=80
+        autocmd BufEnter * let b:textwidth=100
+        autocmd Filetype python let b:textwidth=100
     augroup END
 
     augroup enable_syntax_highlighting
@@ -278,6 +283,8 @@ noremap <leader>s :setlocal spell! spelllang=en_gb<CR>
 " inoremap kj <es
 noremap <leader>sy :if exists("g:syntax_on") <Bar> syntax off <Bar> else <Bar> syntax on <Bar> endif <CR>c>
 
+noremap <leader>ws :%s/\s\+$//e<CR>
+
 " ====================================== Plugin Settings ===
 "Additional python syntax highlighting
 let python_highlight_all=1
@@ -289,3 +296,12 @@ if has("gui_running")
     nnoremap <C-Up> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)+1', '')<CR>
     nnoremap <C-Down> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)-1', '')<CR>
 endif
+
+" workaround for https://github.com/vim/vim/issues/1start671
+if has("unix")
+  let s:uname = system("echo -n \"$(uname)\"")
+  if !v:shell_error && s:uname == "Linux"
+    set t_BE=
+  endif
+endif
+
