@@ -221,6 +221,12 @@ if has("autocmd")
         autocmd FileType python,vim,vimrc setlocal ts=4 sts=4 sw=4 expandtab
     augroup END
 
+    augroup set_commentary
+        " Filetype specific tabbing
+        autocmd!
+        autocmd FileType cpp let &l:commentstring="// %s"
+    augroup END
+
     augroup set_text_width
         " Set default textwidth
         autocmd!
