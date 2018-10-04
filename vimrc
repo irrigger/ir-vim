@@ -11,12 +11,30 @@
 
 " ==================================== Start Up Settings ===
 
-runtime bundle/pathogen/autoload/pathogen.vim
-call pathogen#infect()
-:Helptags
-
-" Do not try to be VI compatible
 set nocompatible
+filetype off
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-commentary'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'mbbill/undotree'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'godlygeek/tabular'
+
+call vundle#end()
+filetype plugin indent on
+
 " Syntax highlighing
 syntax on
 " Try to detect filetypes
@@ -292,16 +310,16 @@ noremap <leader>sy :if exists("g:syntax_on") <Bar> syntax off <Bar> else <Bar> s
 noremap <leader>ws :%s/\s\+$//e<CR>
 
 " ====================================== Plugin Settings ===
+
+nnoremap <F5> :UndotreeToggle<CR>
+" let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+nmap <leader>c <Plug>CommentaryLine
+vmap <leader>c <Plug>Commentary
+
 "Additional python syntax highlighting
 let python_highlight_all=1
-
-" Gundo Plugin
-nnoremap <F5> :GundoToggle<CR>
-
-if has("gui_running")
-    nnoremap <C-Up> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)+1', '')<CR>
-    nnoremap <C-Down> :silent let &guifont=substitute(&guifont, ':h\zs\d\+', '\=submatch(0)-1', '')<CR>
-endif
 
 " workaround for https://github.com/vim/vim/issues/1start671
 if has("unix")
