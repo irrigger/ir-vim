@@ -11,9 +11,8 @@ Installation
 	cd ~
 	git clone https://github.com/irrigger/ir-vim.git .vim
 	ln -s .vim/vimrc .vimrc
-	cd .vim
-	git submodule init
-	git submodule update
+	vim
+	:PluginInstall
 
 You should now be up and running with my setup.
 
