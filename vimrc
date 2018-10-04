@@ -139,9 +139,9 @@ set wildignorecase
 " Complete from a Dictionary if possible
 set complete+=,k
 " List longest first. Don't know if I want this
-set wildmode=list:longest,full
+set wildmode=longest,list,full
 " Whoever wanted to modify a .pyc?
-set wildignore+=*.pyc
+set wildignore+=*.pyc,*.autosave,*~,*.exr,*.png,*.gif,*.bcd,*.jpg,*.jpeg,*.mp4,*.pc2,*.aus,*.hip,*.abc,*.xcf,*.pdf,*.tgz,*.tar,*.gz
 " Commandline remembrance
 set history=10000
 " Give me lots of Undos
